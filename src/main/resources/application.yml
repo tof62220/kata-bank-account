@@ -1,0 +1,2 @@
+spring.application.name: bankaccount
+spring.mongodb.embedded.version: 5.0.5
