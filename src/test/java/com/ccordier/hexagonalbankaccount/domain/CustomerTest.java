@@ -34,7 +34,7 @@ class CustomerTest {
 		NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Customer(null, "Gaston", "Lagaffe"));
 
-		assertEquals("Client Number is mandatory.", exception.getMessage());
+		assertEquals("clientNumber is marked non-null but is null", exception.getMessage());
 
 	}
 
@@ -44,7 +44,7 @@ class CustomerTest {
 		NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Customer("0001", null, "Lagaffe"));
 
-		assertEquals("Firstname is mandatory.", exception.getMessage());
+		assertEquals("firstname is marked non-null but is null", exception.getMessage());
 
 	}
 
@@ -54,7 +54,7 @@ class CustomerTest {
 		NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Customer("0001", "Gaston", null));
 
-		assertEquals("Lastname is mandatory.", exception.getMessage());
+		assertEquals("lastname is marked non-null but is null", exception.getMessage());
 
 	}
 

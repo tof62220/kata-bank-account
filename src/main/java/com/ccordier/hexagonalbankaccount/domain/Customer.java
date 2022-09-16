@@ -1,9 +1,9 @@
 package com.ccordier.hexagonalbankaccount.domain;
 
-import java.util.Objects;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 
 /**
@@ -13,25 +13,16 @@ import lombok.Getter;
  */
 @Getter
 @EqualsAndHashCode
+@RequiredArgsConstructor
 public class Customer {
 
+	@NonNull
 	private final String clientNumber;
 
+	@NonNull
 	private final String firstname;
 
+	@NonNull
 	private final String lastname;
-
-	/**
-	 * Constructs a customer
-	 * 
-	 * @param clientNumber The number of the customer
-	 * @param firstname The firstname of the customer
-	 * @param lastname The lastname of the customer
-	 */
-	public Customer(final String clientNumber, final String firstname, final String lastname) {
-		this.clientNumber = Objects.requireNonNull(clientNumber, "Client Number is mandatory.");
-		this.firstname = Objects.requireNonNull(firstname, "Firstname is mandatory.");
-		this.lastname = Objects.requireNonNull(lastname, "Lastname is mandatory.");
-	}
 
 }
