@@ -42,7 +42,7 @@ public class PositiveAmount {
 	 * @return {@code this + otherAmount}
 	 */
 	public PositiveAmount add(final PositiveAmount otherAmount) {
-		return new PositiveAmount(this.value.add(otherAmount.value).setScale(AMOUNT_SCALE, RoundingMode.HALF_EVEN));
+		return valueOf(this.value.add(otherAmount.value).setScale(AMOUNT_SCALE, RoundingMode.HALF_EVEN));
 	}
 
 	/**
@@ -57,8 +57,20 @@ public class PositiveAmount {
 		if (this.value.compareTo(otherAmount.value) < 0) {
 			throw new ArithmeticException("The amount to subtract is greater than this amount.");
 		}
-		return new PositiveAmount(
+		return valueOf(
 				this.value.subtract(otherAmount.value).setScale(AMOUNT_SCALE, RoundingMode.HALF_EVEN));
+	}
+
+	/**
+	 * Builds a {@code PositiveAmount} from a {@code BigDecimal}
+	 * 
+	 * @param value The value of the amount
+	 * @return the builded {@code PositiveAmount}
+	 * @throws NullPointerException if the value is null
+	 * @throws IllegalArgumentException if the value is a negative number
+	 */
+	public static PositiveAmount valueOf(final BigDecimal value) {
+		return new PositiveAmount(value);
 	}
 
 	/**
