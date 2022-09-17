@@ -3,6 +3,7 @@ package com.ccordier.hexagonalbankaccount.domain;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -56,7 +57,7 @@ class PositiveAmountTest {
 		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
 		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
 
-		assertTrue(amount1.hashCode() == amount1.hashCode());
+		assertTrue(amount1.hashCode() == amount2.hashCode());
 	}
 
 	@Test
@@ -81,6 +82,43 @@ class PositiveAmountTest {
 		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
 
 		assertFalse(amount1.equals(amount2));
+	}
+
+	@Test
+	void testAdd() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1500));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(500));
+
+		PositiveAmount result = amount1.add(amount2);
+
+		assertNotNull(result);
+		assertEquals(BigDecimal.valueOf(2000).setScale(2, RoundingMode.HALF_EVEN), result.getValue());
+		assertNotEquals(amount1, result);
+		assertNotEquals(amount2, result);
+	}
+
+	@Test
+	void testSubtract() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1500));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(500));
+
+		PositiveAmount result = amount1.subtract(amount2);
+
+		assertNotNull(result);
+		assertEquals(BigDecimal.valueOf(1000).setScale(2, RoundingMode.HALF_EVEN), result.getValue());
+		assertNotEquals(amount1, result);
+		assertNotEquals(amount2, result);
+	}
+
+	@Test
+	void testSubtractThrowArithmeticException() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(500));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1500));
+
+		ArithmeticException exception = assertThrows(ArithmeticException.class,
+				() -> amount1.subtract(amount2));
+
+		assertEquals("Cannot subtract 1500.00 to 500.00", exception.getMessage());
 	}
 
 }
