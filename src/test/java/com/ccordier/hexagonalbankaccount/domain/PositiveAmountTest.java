@@ -2,8 +2,10 @@ package com.ccordier.hexagonalbankaccount.domain;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -47,6 +49,38 @@ class PositiveAmountTest {
 
 		assertEquals("The value of the amount must be a positive number.", exception.getMessage());
 
+	}
+
+	@Test
+	void testHashCodeWithSameAmount() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
+
+		assertTrue(amount1.hashCode() == amount1.hashCode());
+	}
+
+	@Test
+	void testEqualsWithSameAmount() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
+
+		assertTrue(amount1.equals(amount2));
+	}
+
+	@Test
+	void testHashCodeWithNotSameAmount() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
+
+		assertFalse(amount1.hashCode() == amount1.hashCode());
+	}
+
+	@Test
+	void testEqualsWithNotSameAmount() throws Exception {
+		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
+
+		assertFalse(amount1.equals(amount1));
 	}
 
 }
