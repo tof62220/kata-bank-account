@@ -72,7 +72,7 @@ class PositiveAmountTest {
 		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
 		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
 
-		assertFalse(amount1.hashCode() == amount1.hashCode());
+		assertFalse(amount1.hashCode() == amount2.hashCode());
 	}
 
 	@Test
@@ -80,7 +80,7 @@ class PositiveAmountTest {
 		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
 		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
 
-		assertFalse(amount1.equals(amount1));
+		assertFalse(amount1.equals(amount2));
 	}
 
 }
