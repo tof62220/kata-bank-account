@@ -118,7 +118,7 @@ class PositiveAmountTest {
 		ArithmeticException exception = assertThrows(ArithmeticException.class,
 				() -> amount1.subtract(amount2));
 
-		assertEquals("Cannot subtract 1500.00 to 500.00", exception.getMessage());
+		assertEquals("The amount to subtract is greater than this amount.", exception.getMessage());
 	}
 
 }

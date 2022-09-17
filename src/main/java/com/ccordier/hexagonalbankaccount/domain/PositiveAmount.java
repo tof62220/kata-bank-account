@@ -35,6 +35,33 @@ public class PositiveAmount {
 	}
 
 	/**
+	 * Returns a {@code PositiveAmount} whose value is {@code (this +
+	 * otherAmount)}
+	 * 
+	 * @param otherAmount The amount to be added to this {@code PositiveAmount}
+	 * @return {@code this + otherAmount}
+	 */
+	public PositiveAmount add(final PositiveAmount otherAmount) {
+		return new PositiveAmount(this.value.add(otherAmount.value).setScale(AMOUNT_SCALE, RoundingMode.HALF_EVEN));
+	}
+
+	/**
+	 * Returns a {@code PositiveAmount} whose value is {@code (this -
+	 * otherAmount)}
+	 * 
+	 * @param otherAmount The amount to be subtracted frto this {@code PositiveAmount}
+	 * @return {@code this - otherAmount}
+	 * @throws ArithmeticException if {@code otherAmount} is greater than {@code this}
+	 */
+	public PositiveAmount subtract(final PositiveAmount otherAmount) {
+		if (this.value.compareTo(otherAmount.value) < 0) {
+			throw new ArithmeticException("The amount to subtract is greater than this amount.");
+		}
+		return new PositiveAmount(
+				this.value.subtract(otherAmount.value).setScale(AMOUNT_SCALE, RoundingMode.HALF_EVEN));
+	}
+
+	/**
 	 * Validates the value of the positive amount
 	 * 
 	 * @param value The value of the amount
