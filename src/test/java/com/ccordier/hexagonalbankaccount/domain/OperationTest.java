@@ -13,8 +13,6 @@ import java.time.OffsetDateTime;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
 
-import com.mongodb.client.model.changestream.OperationType;
-
 
 class OperationTest {
 
@@ -50,7 +48,7 @@ class OperationTest {
 						PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 						PositiveAmount.valueOf(BigDecimal.valueOf(1500))));
 
-		assertEquals("Client Number is mandatory.", exception.getMessage());
+		assertEquals("date is marked non-null but is null", exception.getMessage());
 
 	}
 
@@ -63,7 +61,7 @@ class OperationTest {
 						PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 						PositiveAmount.valueOf(BigDecimal.valueOf(1500))));
 
-		assertEquals("Client Number is mandatory.", exception.getMessage());
+		assertEquals("type is marked non-null but is null", exception.getMessage());
 
 	}
 
@@ -76,7 +74,7 @@ class OperationTest {
 						null,
 						PositiveAmount.valueOf(BigDecimal.valueOf(1500))));
 
-		assertEquals("Client Number is mandatory.", exception.getMessage());
+		assertEquals("amount is marked non-null but is null", exception.getMessage());
 
 	}
 
@@ -89,7 +87,7 @@ class OperationTest {
 						PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 						null));
 
-		assertEquals("Client Number is mandatory.", exception.getMessage());
+		assertEquals("balanceAfterOperation is marked non-null but is null", exception.getMessage());
 
 	}
 
