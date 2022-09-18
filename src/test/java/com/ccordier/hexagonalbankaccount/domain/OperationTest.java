@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.ThrowingSupplier;
@@ -149,6 +150,24 @@ class OperationTest {
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
 
 		assertFalse(opreration1.equals(opreration2));
+	}
+
+	@Test
+	void testCompareTo() throws Exception {
+		OffsetDateTime date1 = OffsetDateTime.of(2022, 1, 1, 1, 1, 1, 1, ZoneOffset.UTC);
+		OffsetDateTime date2 = OffsetDateTime.of(2022, 2, 2, 2, 2, 2, 2, ZoneOffset.UTC);
+
+		Operation opreration1 = new Operation(date1,
+				OperationType.WITHDRAWAL,
+				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
+				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
+		Operation opreration2 = new Operation(date2,
+				OperationType.DEPOSIT,
+				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
+				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
+
+		assertTrue(opreration1.compareTo(opreration2) == -1);
+		assertTrue(opreration2.compareTo(opreration1) == 1);
 	}
 
 }
