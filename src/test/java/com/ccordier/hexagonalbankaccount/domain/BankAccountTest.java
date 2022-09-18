@@ -34,7 +34,7 @@ class BankAccountTest {
 						accountStatement);
 			}
 		});
-		System.out.println(id);
+
 		assertNotNull(bankAccount);
 		assertEquals(id, bankAccount.getId());
 		assertEquals("0001", bankAccount.getAccountNumber());
@@ -172,7 +172,7 @@ class BankAccountTest {
 		ArithmeticException exception = assertThrows(ArithmeticException.class,
 				() -> account.withdraw(PositiveAmount.valueOf(BigDecimal.valueOf(2000))));
 
-		assertEquals("Cannot subtract 2000.00 to 1000.00", exception.getMessage());
+		assertEquals("The amount to subtract is greater than this amount.", exception.getMessage());
 
 	}
 

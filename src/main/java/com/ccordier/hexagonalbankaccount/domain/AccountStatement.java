@@ -1,5 +1,6 @@
 package com.ccordier.hexagonalbankaccount.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -47,6 +48,15 @@ public class AccountStatement {
 	 */
 	public List<Operation> getOperations() {
 		return operations.stream().sorted().collect(Collectors.toUnmodifiableList());
+	}
+
+	/**
+	 * Returns a new instance of {@code AccountStatement} with an empty list of {@code Operation}
+	 * 
+	 * @return a new instance of {@code AccountStatement}
+	 */
+	public static AccountStatement getInstance() {
+		return new AccountStatement(new ArrayList<>());
 	}
 
 }
