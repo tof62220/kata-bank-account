@@ -20,7 +20,7 @@ class PositiveAmountTest {
 	@Test
 	void testConstructorWithNotNullParameter() throws Exception {
 
-		PositiveAmount amount = assertDoesNotThrow(new ThrowingSupplier<PositiveAmount>() {
+		final PositiveAmount amount = assertDoesNotThrow(new ThrowingSupplier<PositiveAmount>() {
 			@Override
 			public PositiveAmount get() throws Throwable {
 				return new PositiveAmount(BigDecimal.valueOf(1500));
@@ -35,7 +35,7 @@ class PositiveAmountTest {
 	@Test
 	void testConstructorWithNullParameter() throws Exception {
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new PositiveAmount(null));
 
 		assertEquals("The value of the amount is mandatory.", exception.getMessage());
@@ -45,7 +45,7 @@ class PositiveAmountTest {
 	@Test
 	void testConstructorWithNegativeNumber() throws Exception {
 
-		IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+		final IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
 				() -> new PositiveAmount(BigDecimal.valueOf(-1500)));
 
 		assertEquals("The value of the amount must be a positive number.", exception.getMessage());
@@ -54,42 +54,42 @@ class PositiveAmountTest {
 
 	@Test
 	void testHashCodeWithSameAmount() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
 
 		assertTrue(amount1.hashCode() == amount2.hashCode());
 	}
 
 	@Test
 	void testEqualsWithSameAmount() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1234));
 
 		assertTrue(amount1.equals(amount2));
 	}
 
 	@Test
 	void testHashCodeWithNotSameAmount() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
 
 		assertFalse(amount1.hashCode() == amount2.hashCode());
 	}
 
 	@Test
 	void testEqualsWithNotSameAmount() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1234));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(4321));
 
 		assertFalse(amount1.equals(amount2));
 	}
 
 	@Test
 	void testAdd() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1500));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(500));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1500));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(500));
 
-		PositiveAmount result = amount1.add(amount2);
+		final PositiveAmount result = amount1.add(amount2);
 
 		assertNotNull(result);
 		assertEquals(BigDecimal.valueOf(2000).setScale(2, RoundingMode.HALF_EVEN), result.getValue());
@@ -99,10 +99,10 @@ class PositiveAmountTest {
 
 	@Test
 	void testSubtract() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1500));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(500));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(1500));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(500));
 
-		PositiveAmount result = amount1.subtract(amount2);
+		final PositiveAmount result = amount1.subtract(amount2);
 
 		assertNotNull(result);
 		assertEquals(BigDecimal.valueOf(1000).setScale(2, RoundingMode.HALF_EVEN), result.getValue());
@@ -112,10 +112,10 @@ class PositiveAmountTest {
 
 	@Test
 	void testSubtractThrowArithmeticException() throws Exception {
-		PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(500));
-		PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1500));
+		final PositiveAmount amount1 = new PositiveAmount(BigDecimal.valueOf(500));
+		final PositiveAmount amount2 = new PositiveAmount(BigDecimal.valueOf(1500));
 
-		ArithmeticException exception = assertThrows(ArithmeticException.class,
+		final ArithmeticException exception = assertThrows(ArithmeticException.class,
 				() -> amount1.subtract(amount2));
 
 		assertEquals("The amount to subtract is greater than this amount.", exception.getMessage());

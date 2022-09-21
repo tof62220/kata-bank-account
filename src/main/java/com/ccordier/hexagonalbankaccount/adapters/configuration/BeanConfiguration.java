@@ -20,7 +20,7 @@ import com.ccordier.hexagonalbankaccount.service.BankAccountService;
 public class BeanConfiguration {
 
 	@Bean
-	BankAccountService bankAccountService(BankAccountRepository repository) {
+	BankAccountService bankAccountService(final BankAccountRepository repository) {
 		return new BankAccountService(repository, repository);
 	}
 }

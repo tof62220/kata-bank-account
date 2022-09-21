@@ -20,9 +20,9 @@ class OperationTest {
 	@Test
 	void testConstructorWithNotNullParameters() throws Exception {
 
-		OffsetDateTime oprationDate = OffsetDateTime.now();
+		final OffsetDateTime oprationDate = OffsetDateTime.now();
 
-		Operation operation = assertDoesNotThrow(new ThrowingSupplier<Operation>() {
+		final Operation operation = assertDoesNotThrow(new ThrowingSupplier<Operation>() {
 			@Override
 			public Operation get() throws Throwable {
 				return new Operation(oprationDate,
@@ -43,7 +43,7 @@ class OperationTest {
 	@Test
 	void testConstructorWithoutDate() throws Exception {
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Operation(null,
 						OperationType.WITHDRAWAL,
 						PositiveAmount.valueOf(BigDecimal.valueOf(500)),
@@ -56,7 +56,7 @@ class OperationTest {
 	@Test
 	void testConstructorWithoutType() throws Exception {
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Operation(OffsetDateTime.now(),
 						null,
 						PositiveAmount.valueOf(BigDecimal.valueOf(500)),
@@ -69,7 +69,7 @@ class OperationTest {
 	@Test
 	void testConstructorWithoutAmount() throws Exception {
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Operation(OffsetDateTime.now(),
 						OperationType.WITHDRAWAL,
 						null,
@@ -82,7 +82,7 @@ class OperationTest {
 	@Test
 	void testConstructorWithoutBalance() throws Exception {
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new Operation(OffsetDateTime.now(),
 						OperationType.WITHDRAWAL,
 						PositiveAmount.valueOf(BigDecimal.valueOf(500)),
@@ -94,12 +94,12 @@ class OperationTest {
 
 	@Test
 	void testHashCodeWithSameOperation() throws Exception {
-		OffsetDateTime oprationDate = OffsetDateTime.now();
-		Operation opreration1 = new Operation(oprationDate,
+		final OffsetDateTime oprationDate = OffsetDateTime.now();
+		final Operation opreration1 = new Operation(oprationDate,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
-		Operation opreration2 = new Operation(oprationDate,
+		final Operation opreration2 = new Operation(oprationDate,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
@@ -109,12 +109,12 @@ class OperationTest {
 
 	@Test
 	void testEqualsWithSameOperation() throws Exception {
-		OffsetDateTime oprationDate = OffsetDateTime.now();
-		Operation opreration1 = new Operation(oprationDate,
+		final OffsetDateTime oprationDate = OffsetDateTime.now();
+		final Operation opreration1 = new Operation(oprationDate,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
-		Operation opreration2 = new Operation(oprationDate,
+		final Operation opreration2 = new Operation(oprationDate,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
@@ -124,12 +124,12 @@ class OperationTest {
 
 	@Test
 	void testHashCodeWithNotSameOperation() throws Exception {
-		OffsetDateTime oprationDate = OffsetDateTime.now();
-		Operation opreration1 = new Operation(oprationDate,
+		final OffsetDateTime oprationDate = OffsetDateTime.now();
+		final Operation opreration1 = new Operation(oprationDate,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
-		Operation opreration2 = new Operation(oprationDate,
+		final Operation opreration2 = new Operation(oprationDate,
 				OperationType.DEPOSIT,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
@@ -139,12 +139,12 @@ class OperationTest {
 
 	@Test
 	void testEqualsWithNotSameOperation() throws Exception {
-		OffsetDateTime oprationDate = OffsetDateTime.now();
-		Operation opreration1 = new Operation(oprationDate,
+		final OffsetDateTime oprationDate = OffsetDateTime.now();
+		final Operation opreration1 = new Operation(oprationDate,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
-		Operation opreration2 = new Operation(oprationDate,
+		final Operation opreration2 = new Operation(oprationDate,
 				OperationType.DEPOSIT,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
@@ -154,14 +154,14 @@ class OperationTest {
 
 	@Test
 	void testCompareTo() throws Exception {
-		OffsetDateTime date1 = OffsetDateTime.of(2022, 1, 1, 1, 1, 1, 1, ZoneOffset.UTC);
-		OffsetDateTime date2 = OffsetDateTime.of(2022, 2, 2, 2, 2, 2, 2, ZoneOffset.UTC);
+		final OffsetDateTime date1 = OffsetDateTime.of(2022, 1, 1, 1, 1, 1, 1, ZoneOffset.UTC);
+		final OffsetDateTime date2 = OffsetDateTime.of(2022, 2, 2, 2, 2, 2, 2, ZoneOffset.UTC);
 
-		Operation opreration1 = new Operation(date1,
+		final Operation opreration1 = new Operation(date1,
 				OperationType.WITHDRAWAL,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
-		Operation opreration2 = new Operation(date2,
+		final Operation opreration2 = new Operation(date2,
 				OperationType.DEPOSIT,
 				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
 				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));

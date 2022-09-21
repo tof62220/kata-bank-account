@@ -30,9 +30,9 @@ public class BankAccountController {
 	private final WithdrawUseCase withdrawUseCase;
 	private final HistoryUseCase historyUseCase;
 
-	public BankAccountController(DepositUseCase depositUseCase,
-			WithdrawUseCase withdrawUseCase,
-			HistoryUseCase historyUseCase) {
+	public BankAccountController(final DepositUseCase depositUseCase,
+			final WithdrawUseCase withdrawUseCase,
+			final HistoryUseCase historyUseCase) {
 		this.depositUseCase = depositUseCase;
 		this.withdrawUseCase = withdrawUseCase;
 		this.historyUseCase = historyUseCase;

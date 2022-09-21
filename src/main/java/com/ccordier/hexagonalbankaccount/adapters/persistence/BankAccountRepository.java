@@ -20,17 +20,17 @@ public class BankAccountRepository implements LoadAccountPort, SaveAccountPort {
 
 	private SpringDataBankAccountRepository repository;
 
-	public BankAccountRepository(SpringDataBankAccountRepository repository) {
+	public BankAccountRepository(final SpringDataBankAccountRepository repository) {
 		this.repository = repository;
 	}
 
 	@Override
-	public Optional<BankAccount> load(UUID id) {
+	public Optional<BankAccount> load(final UUID id) {
 		return repository.findById(id);
 	}
 
 	@Override
-	public void save(BankAccount bankAccount) {
+	public void save(final BankAccount bankAccount) {
 		repository.save(bankAccount);
 	}
 }

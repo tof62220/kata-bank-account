@@ -19,12 +19,12 @@ class BankAccountTest {
 
 	@Test
 	void testConstructorWithNotNullParameters() throws Exception {
-		UUID id = UUID.randomUUID();
-		Customer customer = new Customer("0001", "Gaston", "Lagaffe");
-		AccountStatement accountStatement = AccountStatement.getInstance();
-		PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
+		final UUID id = UUID.randomUUID();
+		final Customer customer = new Customer("0001", "Gaston", "Lagaffe");
+		final AccountStatement accountStatement = AccountStatement.getInstance();
+		final PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
 
-		BankAccount bankAccount = assertDoesNotThrow(new ThrowingSupplier<BankAccount>() {
+		final BankAccount bankAccount = assertDoesNotThrow(new ThrowingSupplier<BankAccount>() {
 			@Override
 			public BankAccount get() throws Throwable {
 				return new BankAccount(id,
@@ -46,11 +46,11 @@ class BankAccountTest {
 	@Test
 	void testConstructorWithoutId() throws Exception {
 
-		Customer customer = new Customer("0001", "Gaston", "Lagaffe");
-		AccountStatement accountStatement = AccountStatement.getInstance();
-		PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
+		final Customer customer = new Customer("0001", "Gaston", "Lagaffe");
+		final AccountStatement accountStatement = AccountStatement.getInstance();
+		final PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new BankAccount(null,
 						"0001",
 						initialBalance,
@@ -63,10 +63,10 @@ class BankAccountTest {
 
 	@Test
 	void testConstructorWithoutAccountNumber() throws Exception {
-		UUID id = UUID.randomUUID();
-		Customer customer = new Customer("0001", "Gaston", "Lagaffe");
-		AccountStatement accountStatement = AccountStatement.getInstance();
-		PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
+		final UUID id = UUID.randomUUID();
+		final Customer customer = new Customer("0001", "Gaston", "Lagaffe");
+		final AccountStatement accountStatement = AccountStatement.getInstance();
+		final PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
 
 		NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new BankAccount(id,
@@ -81,11 +81,11 @@ class BankAccountTest {
 
 	@Test
 	void testConstructorWithoutBalance() throws Exception {
-		UUID id = UUID.randomUUID();
-		Customer customer = new Customer("0001", "Gaston", "Lagaffe");
-		AccountStatement accountStatement = AccountStatement.getInstance();
+		final UUID id = UUID.randomUUID();
+		final Customer customer = new Customer("0001", "Gaston", "Lagaffe");
+		final AccountStatement accountStatement = AccountStatement.getInstance();
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new BankAccount(id,
 						"0001",
 						null,
@@ -98,11 +98,11 @@ class BankAccountTest {
 
 	@Test
 	void testConstructorWithoutCustomer() throws Exception {
-		UUID id = UUID.randomUUID();
-		AccountStatement accountStatement = AccountStatement.getInstance();
-		PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
+		final UUID id = UUID.randomUUID();
+		final AccountStatement accountStatement = AccountStatement.getInstance();
+		final PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new BankAccount(id,
 						"0001",
 						initialBalance,
@@ -115,11 +115,11 @@ class BankAccountTest {
 
 	@Test
 	void testConstructorWithoutAccountStatement() throws Exception {
-		UUID id = UUID.randomUUID();
-		Customer customer = new Customer("0001", "Gaston", "Lagaffe");
-		PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
+		final UUID id = UUID.randomUUID();
+		final Customer customer = new Customer("0001", "Gaston", "Lagaffe");
+		final PositiveAmount initialBalance = new PositiveAmount(BigDecimal.valueOf(1500));
 
-		NullPointerException exception = assertThrows(NullPointerException.class,
+		final NullPointerException exception = assertThrows(NullPointerException.class,
 				() -> new BankAccount(id,
 						"0001",
 						initialBalance,
@@ -132,14 +132,14 @@ class BankAccountTest {
 
 	@Test
 	void testDeposit() throws Exception {
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
-		BankAccount account = new BankAccount(UUID.randomUUID(),
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final BankAccount account = new BankAccount(UUID.randomUUID(),
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
 				AccountStatement.getInstance());
 
-		BankAccount updatedAccount = account.deposit(PositiveAmount.valueOf(BigDecimal.valueOf(1000)));
+		final BankAccount updatedAccount = account.deposit(PositiveAmount.valueOf(BigDecimal.valueOf(1000)));
 
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(2000)), updatedAccount.getCurrentBalance());
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(1000)), account.getCurrentBalance());
@@ -147,14 +147,14 @@ class BankAccountTest {
 
 	@Test
 	void testWithdraw() throws Exception {
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
-		BankAccount account = new BankAccount(UUID.randomUUID(),
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final BankAccount account = new BankAccount(UUID.randomUUID(),
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
 				AccountStatement.getInstance());
 
-		BankAccount updatedAccount = account.withdraw(PositiveAmount.valueOf(BigDecimal.valueOf(500)));
+		final BankAccount updatedAccount = account.withdraw(PositiveAmount.valueOf(BigDecimal.valueOf(500)));
 
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(500)), updatedAccount.getCurrentBalance());
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(1000)), account.getCurrentBalance());
@@ -162,8 +162,8 @@ class BankAccountTest {
 
 	@Test
 	void testWithdrawThrowArithmeticException() throws Exception {
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
-		BankAccount account = new BankAccount(UUID.randomUUID(),
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final BankAccount account = new BankAccount(UUID.randomUUID(),
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
@@ -178,29 +178,27 @@ class BankAccountTest {
 
 	@Test
 	void testGetHistory() throws Exception {
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
-		BankAccount account = new BankAccount(UUID.randomUUID(),
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final BankAccount account = new BankAccount(UUID.randomUUID(),
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
-				AccountStatement.getInstance());
-
-		account = account.deposit(PositiveAmount.valueOf(BigDecimal.valueOf(1000)));
-		account = account.withdraw(PositiveAmount.valueOf(BigDecimal.valueOf(500)));
+				AccountStatement.getInstance()).deposit(PositiveAmount.valueOf(BigDecimal.valueOf(1000)))
+						.withdraw(PositiveAmount.valueOf(BigDecimal.valueOf(500)));
 
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(1500)), account.getCurrentBalance());
 
-		List<Operation> operations = account.getHistory();
+		final List<Operation> operations = account.getHistory();
 
 		assertEquals(2, operations.size());
-		Operation deposit = operations.get(0);
+		final Operation deposit = operations.get(0);
 
 		assertNotNull(deposit.getDate());
 		assertEquals(OperationType.DEPOSIT, deposit.getType());
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(1000)), deposit.getAmount());
 		assertEquals(PositiveAmount.valueOf(BigDecimal.valueOf(2000)), deposit.getBalanceAfterOperation());
 
-		Operation withdraw = operations.get(1);
+		final Operation withdraw = operations.get(1);
 
 		assertNotNull(withdraw.getDate());
 		assertEquals(OperationType.WITHDRAWAL, withdraw.getType());
@@ -211,15 +209,15 @@ class BankAccountTest {
 
 	@Test
 	void testHashCodeWithSameBankAccount() throws Exception {
-		UUID id = UUID.randomUUID();
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final UUID id = UUID.randomUUID();
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
 
-		BankAccount account1 = new BankAccount(id,
+		final BankAccount account1 = new BankAccount(id,
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
 				AccountStatement.getInstance());
-		BankAccount account2 = new BankAccount(id,
+		final BankAccount account2 = new BankAccount(id,
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
@@ -230,15 +228,15 @@ class BankAccountTest {
 
 	@Test
 	void testEqualsWithSameBankAccount() throws Exception {
-		UUID id = UUID.randomUUID();
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final UUID id = UUID.randomUUID();
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
 
-		BankAccount account1 = new BankAccount(id,
+		final BankAccount account1 = new BankAccount(id,
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
 				AccountStatement.getInstance());
-		BankAccount account2 = new BankAccount(id,
+		final BankAccount account2 = new BankAccount(id,
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
@@ -249,14 +247,14 @@ class BankAccountTest {
 
 	@Test
 	void testHashCodeWithNotSameBankAccount() throws Exception {
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
 
-		BankAccount account1 = new BankAccount(UUID.randomUUID(),
+		final BankAccount account1 = new BankAccount(UUID.randomUUID(),
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
 				AccountStatement.getInstance());
-		BankAccount account2 = new BankAccount(UUID.randomUUID(),
+		final BankAccount account2 = new BankAccount(UUID.randomUUID(),
 				"0002",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
@@ -267,14 +265,14 @@ class BankAccountTest {
 
 	@Test
 	void testEqualsWithNotSameBankAccount() throws Exception {
-		Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
 
-		BankAccount account1 = new BankAccount(UUID.randomUUID(),
+		final BankAccount account1 = new BankAccount(UUID.randomUUID(),
 				"0001",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,
 				AccountStatement.getInstance());
-		BankAccount account2 = new BankAccount(UUID.randomUUID(),
+		final BankAccount account2 = new BankAccount(UUID.randomUUID(),
 				"0002",
 				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
 				customer,

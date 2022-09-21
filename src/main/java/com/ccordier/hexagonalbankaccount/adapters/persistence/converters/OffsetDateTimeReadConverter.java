@@ -13,8 +13,7 @@ import org.springframework.core.convert.converter.Converter;
 public class OffsetDateTimeReadConverter implements Converter<String, OffsetDateTime> {
 
 	@Override
-	public OffsetDateTime convert(String source) {
-		//return date.toInstant().atZone(ZoneOffset.UTC).toOffsetDateTime();
+	public OffsetDateTime convert(final String source) {
 		return OffsetDateTime.parse(source);
 	}
 

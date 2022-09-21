@@ -2,7 +2,6 @@ package com.ccordier.hexagonalbankaccount.adapters.persistence.converters;
 
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.Date;
 
 import org.springframework.core.convert.converter.Converter;
 
@@ -15,8 +14,7 @@ import org.springframework.core.convert.converter.Converter;
 public class OffsetDateTimeWriteConverter implements Converter<OffsetDateTime, String> {
 
 	@Override
-	public String convert(OffsetDateTime source) {
+	public String convert(final OffsetDateTime source) {
 		return source.toInstant().atZone(ZoneOffset.UTC).toString();
-		//return Date.from(offsetDateTime.toInstant());
 	}
 }

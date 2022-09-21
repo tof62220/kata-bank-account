@@ -39,7 +39,7 @@ public class OperationResponse {
 	 * @param operation The {@code Operation} to be converted
 	 * @return an {@code OperationResponse}
 	 */
-	public static OperationResponse of(Operation operation) {
+	public static OperationResponse of(final Operation operation) {
 		return new OperationResponse(operation.getDate(),
 				operation.getType().name(),
 				operation.getAmount().getValue(),

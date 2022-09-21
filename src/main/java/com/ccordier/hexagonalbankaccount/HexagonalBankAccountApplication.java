@@ -23,11 +23,11 @@ public class HexagonalBankAccountApplication {
 	}
 
 	@Bean
-	public CommandLineRunner bootstrapData(BankAccountRepository repository) {
+	public CommandLineRunner bootstrapData(final BankAccountRepository repository) {
 		return (args) -> {
-			Customer customer = new Customer("0001", "Gastion", "Lagaffe");
-			BigDecimal initialBalance = BigDecimal.valueOf(1000);
-			BankAccount bankAccount = new BankAccount(UUID.fromString("c397b7f1-9d85-491b-96c8-f0bbe1981774"),
+			final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+			final BigDecimal initialBalance = BigDecimal.valueOf(1000);
+			final BankAccount bankAccount = new BankAccount(UUID.fromString("c397b7f1-9d85-491b-96c8-f0bbe1981774"),
 					"0001",
 					PositiveAmount.valueOf(initialBalance),
 					customer,
