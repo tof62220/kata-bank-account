@@ -1,5 +1,6 @@
 package com.ccordier.hexagonalbankaccount.domain;
 
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -15,6 +16,8 @@ import lombok.EqualsAndHashCode;
  */
 @EqualsAndHashCode
 public class AccountStatement {
+
+	public static final String STATEMENT_HEADER = "date | operation | amount | balance";
 
 	private final List<Operation> operations;
 
@@ -57,6 +60,18 @@ public class AccountStatement {
 	 */
 	public static AccountStatement getInstance() {
 		return new AccountStatement(new ArrayList<>());
+	}
+
+	/**
+	 * Prints operations in an output stream
+	 * 
+	 * @param printer the output stream
+	 */
+	public void printTo(final PrintStream printer) {
+		printer.println(STATEMENT_HEADER);
+		for (Operation operation : getOperations()) {
+			operation.printTo(printer);
+		}
 	}
 
 }

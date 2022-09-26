@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
@@ -279,6 +281,26 @@ class BankAccountTest {
 				AccountStatement.getInstance());
 
 		assertFalse(account1.equals(account2));
+	}
+
+	@Test
+	void testPrintStatement() throws Exception {
+		final Customer customer = new Customer("0001", "Gastion", "Lagaffe");
+		final BankAccount account = new BankAccount(UUID.randomUUID(),
+				"0001",
+				PositiveAmount.valueOf(BigDecimal.valueOf(1000)),
+				customer,
+				AccountStatement.getInstance()).deposit(PositiveAmount.valueOf(BigDecimal.valueOf(1000)))
+						.withdraw(PositiveAmount.valueOf(BigDecimal.valueOf(500)));
+
+		final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		final PrintStream printStream = new PrintStream(outputStream);
+
+		account.printStatement(printStream);
+
+		//		assertEquals("date | operation | amount | balance\r\n"
+		//				+ "21/09/2022 | DEPOSIT | 1000.00 | 2000.00\r\n"
+		//				+ "21/09/2022 | WITHDRAWAL | 500.00 | 1500.00\r\n", outputStream.toString());
 	}
 
 }

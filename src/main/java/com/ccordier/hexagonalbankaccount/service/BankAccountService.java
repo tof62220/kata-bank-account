@@ -1,5 +1,6 @@
 package com.ccordier.hexagonalbankaccount.service;
 
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -10,6 +11,7 @@ import com.ccordier.hexagonalbankaccount.domain.Operation;
 import com.ccordier.hexagonalbankaccount.domain.PositiveAmount;
 import com.ccordier.hexagonalbankaccount.port.incoming.DepositUseCase;
 import com.ccordier.hexagonalbankaccount.port.incoming.HistoryUseCase;
+import com.ccordier.hexagonalbankaccount.port.incoming.PrintingUseCase;
 import com.ccordier.hexagonalbankaccount.port.incoming.WithdrawUseCase;
 import com.ccordier.hexagonalbankaccount.port.outgoing.LoadAccountPort;
 import com.ccordier.hexagonalbankaccount.port.outgoing.SaveAccountPort;
@@ -23,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author c.cordier
  */
 @Slf4j
-public class BankAccountService implements DepositUseCase, WithdrawUseCase, HistoryUseCase {
+public class BankAccountService implements DepositUseCase, WithdrawUseCase, HistoryUseCase, PrintingUseCase {
 
 	private LoadAccountPort loadAccountPort;
 	private SaveAccountPort saveAccountPort;
@@ -64,6 +66,14 @@ public class BankAccountService implements DepositUseCase, WithdrawUseCase, Hist
 				.orElseThrow(NoSuchElementException::new);
 		log.info("Bank account with id = {} was found", id);
 		return account.getHistory();
+	}
+
+	@Override
+	public void print(UUID id, PrintStream printer) {
+		BankAccount account = loadAccountPort.load(id)
+				.orElseThrow(NoSuchElementException::new);
+
+		account.printStatement(printer);
 	}
 
 }

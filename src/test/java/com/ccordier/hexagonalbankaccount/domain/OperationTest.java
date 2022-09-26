@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -168,6 +170,24 @@ class OperationTest {
 
 		assertTrue(opreration1.compareTo(opreration2) == -1);
 		assertTrue(opreration2.compareTo(opreration1) == 1);
+	}
+
+	@Test
+	void testPrintTo() throws Exception {
+
+		final OffsetDateTime date = OffsetDateTime.of(2022, 1, 1, 1, 1, 1, 1, ZoneOffset.UTC);
+
+		final Operation opreration = new Operation(date,
+				OperationType.WITHDRAWAL,
+				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
+				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
+
+		final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		final PrintStream printStream = new PrintStream(outputStream);
+
+		opreration.printTo(printStream);
+
+		assertEquals("01/01/2022 | WITHDRAWAL | 500.00 | 1500.00\r\n", outputStream.toString());
 	}
 
 }

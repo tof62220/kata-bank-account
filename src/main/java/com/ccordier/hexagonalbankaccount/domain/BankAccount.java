@@ -1,5 +1,6 @@
 package com.ccordier.hexagonalbankaccount.domain;
 
+import java.io.PrintStream;
 import java.time.OffsetDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -74,6 +75,15 @@ public class BankAccount {
 				updatedBalance);
 		final AccountStatement updatedAccountStatement = statement.addOperation(withdrawal);
 		return new BankAccount(id, accountNumber, updatedBalance, customer, updatedAccountStatement);
+	}
+
+	/**
+	 * Prints statement account in an output stream
+	 * 
+	 * @param printer the output stream
+	 */
+	public void printStatement(final PrintStream printer) {
+		statement.printTo(printer);
 	}
 
 }

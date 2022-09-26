@@ -7,6 +7,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
@@ -169,6 +171,32 @@ class AccountStatementTest {
 		assertTrue(updatedSortedOperations.size() == 2);
 		assertEquals(opreration1, updatedSortedOperations.get(0));
 		assertEquals(opreration2, updatedSortedOperations.get(1));
+	}
+
+	@Test
+	void testPrintTo() throws Exception {
+		OffsetDateTime date1 = OffsetDateTime.of(2022, 1, 1, 1, 1, 1, 1, ZoneOffset.UTC);
+		OffsetDateTime date2 = OffsetDateTime.of(2022, 2, 2, 2, 2, 2, 2, ZoneOffset.UTC);
+
+		Operation opreration1 = new Operation(date1,
+				OperationType.WITHDRAWAL,
+				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
+				PositiveAmount.valueOf(BigDecimal.valueOf(2000)));
+		Operation opreration2 = new Operation(date2,
+				OperationType.DEPOSIT,
+				PositiveAmount.valueOf(BigDecimal.valueOf(500)),
+				PositiveAmount.valueOf(BigDecimal.valueOf(1500)));
+
+		AccountStatement accountStatement = new AccountStatement(List.of(opreration1, opreration2));
+
+		final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		final PrintStream printStream = new PrintStream(outputStream);
+
+		accountStatement.printTo(printStream);
+
+		assertEquals("date | operation | amount | balance\r\n"
+				+ "01/01/2022 | WITHDRAWAL | 500.00 | 2000.00\r\n"
+				+ "02/02/2022 | DEPOSIT | 500.00 | 1500.00\r\n", outputStream.toString());
 	}
 
 }

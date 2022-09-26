@@ -1,6 +1,8 @@
 package com.ccordier.hexagonalbankaccount.domain;
 
+import java.io.PrintStream;
 import java.time.OffsetDateTime;
+import java.time.format.DateTimeFormatter;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -17,6 +19,10 @@ import lombok.RequiredArgsConstructor;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 public class Operation implements Comparable<Operation> {
+
+	private static final String SEPARATOR = " | ";
+	private static final String DATE_FORMAT = "dd/MM/yyyy";
+	private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern(DATE_FORMAT);
 
 	@NonNull
 	private final OffsetDateTime date;
@@ -41,6 +47,23 @@ public class Operation implements Comparable<Operation> {
 	@Override
 	public int compareTo(Operation otherOperation) {
 		return this.date.compareTo(otherOperation.date);
+	}
+
+	/**
+	 * Prints operation in an output stream
+	 * 
+	 * @param printer the output stream
+	 */
+	public void printTo(final PrintStream printer) {
+		StringBuilder builder = new StringBuilder();
+		builder.append(date.format(DATE_FORMATTER))
+				.append(SEPARATOR)
+				.append(type.name())
+				.append(SEPARATOR)
+				.append(amount.getValue().toString())
+				.append(SEPARATOR)
+				.append(balanceAfterOperation.getValue().toString());
+		printer.println(builder.toString());
 	}
 
 }
